@@ -3,9 +3,9 @@ import { Header } from './components/index';
 import { DevTools } from './utils/index';
 
 export default class App extends React.Component {
-
+    
     static propTypes = {
-        children: PropTypes.any.isRequired
+        children: PropTypes.any.isRequired  
     };
     static path = '/';
     
@@ -18,5 +18,5 @@ export default class App extends React.Component {
             </div>
         );
     }
-
+    
 }
