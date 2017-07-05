@@ -6,7 +6,7 @@ import { HomePage, HomeRoutes } from './pages/home/index';
 import { ContactRoutes } from './pages/contact/index';
 import ErrorPage from './pages/error/index';
 
-
+//test commit
 export default (
     <Route component={ App } path={ App.path } >
         <IndexRoute component={ HomePage } />
