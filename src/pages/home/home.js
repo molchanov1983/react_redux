@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { bindAll } from 'lodash';
 import { connect } from 'react-redux';
-import { 
-    addTodo, 
-    likeTodo, 
-    deleteTodo, 
+import {
+    addTodo,
+    likeTodo,
+    deleteTodo,
     getTodos,
     saveTodos
 } from './actions';
@@ -15,7 +15,7 @@ import { LS } from '../../utils/index';
 import './styles.less';
 
 class HomePage extends React.Component {
-    
+
     static path = '/';
     static propTypes = {
         home: PropTypes.object.isRequired,
@@ -31,7 +31,7 @@ class HomePage extends React.Component {
 
         bindAll(this, ['renderTodos', 'inputOnChange', 'addTodo']);
     }
-    
+
     componentWillMount() {
         this.props.dispatch( getTodos() );
     }
@@ -42,7 +42,11 @@ class HomePage extends React.Component {
 
     addTodo() {
         const { todos } = this.props.home;
-        const id = todos[todos.length - 1].id + 1;
+        let id = 1;
+        if ( todos.length ){
+            id = todos[todos.length - 1].id + 1;
+        }
+
         const name = this.state.todoName;
         this.props.dispatch( addTodo(id, name) );
         this.setState({ todoName: ''});
@@ -57,7 +61,7 @@ class HomePage extends React.Component {
         });
         return (
             <li key={ idx }>
-                <span className={ todoClasses }>{ item.name }</span> 
+                <span className={ todoClasses }>{ item.name }</span>
                 <button className='btn' onClick={ this.deleteTodo.bind(this, item) }><i className='glyphicon glyphicon-remove' /></button>
                 <button className={ btnClasses } onClick={ this.likeTodo.bind(this, item) }><i className='glyphicon glyphicon-heart' /></button>
             </li>
@@ -71,7 +75,7 @@ class HomePage extends React.Component {
     likeTodo(todo) {
         this.props.dispatch( likeTodo(todo) );
     }
-    
+
     render() {
         const { todoName } = this.state;
         const { todos, error } = this.props.home;
@@ -82,7 +86,7 @@ class HomePage extends React.Component {
                     <ul>
                         {
                             todos.length === 0 ? <Loader /> :
-                            todos.map(this.renderTodos) 
+                            todos.map(this.renderTodos)
                         }
                     </ul>
                     <div className='col-xs-4'>
@@ -101,12 +105,12 @@ class HomePage extends React.Component {
     // componentWillUnmount() {
     //
     // }
-    
+
 }
 
 function mapStateToProps(state) {
     return {
-        home: state.home  
+        home: state.home
     };
 }
 

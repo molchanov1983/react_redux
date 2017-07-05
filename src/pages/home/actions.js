@@ -18,7 +18,7 @@ export function addTodo(id, name) {
 
 export function likeTodo(todo) {
     const liked = !todo.liked;
-    
+
     return {
         type: LIKE_TODO,
         todo, liked
@@ -33,8 +33,8 @@ export function deleteTodo(todo) {
 }
 
 export function getTodos() {
-    const todos = LS.get('todos');
-    
+    const todos = LS.get('todos') || [];
+
     return (dispatch) => {
         delay(4000).then(() => {
             dispatch({
